@@ -1,4 +1,24 @@
 <resources>
     <string name="app_name">BreathingPacer</string>
-    <string name="info_tekst">Informativni tekst</string>
+    <string name="info_tekst">Informativni tekst
+     Vivamus facilisis sagittis quam at malesuada. Pellentesque habitant morbi tristique senectus
+        et netus et malesuada fames ac turpis egestas. Morbi in sapien non massa viverra efficitur
+        ac sit amet velit. Phasellus pretium erat et nibh faucibus dapibus. Quisque tempus neque sit
+        amet elit suscipit suscipit. Duis tempus mattis lacus, non sagittis dolor pellentesque id.
+        Curabitur molestie in nisi in fermentum. Suspendisse potenti. Donec tincidunt, sapien eget
+        consequat pulvinar, sapien massa iaculis erat, sed gravida sapien massa congue quam. Proin
+        nec augue id orci tincidunt mollis quis quis nisi. Donec erat ex, vulputate id consequat
+        vitae, ultricies quis arcu.
+
+        Etiam mauris turpis, viverra at mauris sit amet, posuere dapibus augue. Class aptent taciti
+        sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Cras auctor
+        elementum justo ac bibendum. Pellentesque bibendum interdum risus, quis maximus nulla
+        mollis nec. Suspendisse potenti. Proin fringilla varius rhoncus. Sed elementum mi ac
+        eleifend molestie. Cras vitae urna consequat, convallis lectus quis, viverra tortor.
+        Nullam suscipit est vitae nisi ultrices molestie. Sed vulputate, erat eget euismod placerat,
+        sem augue lacinia massa, in placerat metus dolor at dolor. Proin tempus magna at ligula
+        dictum, eget fringilla diam aliquet.
+    </string>
+    <string name="start">Početak</string>
+    <string name="kraj">Kraj</string>
 </resources>
