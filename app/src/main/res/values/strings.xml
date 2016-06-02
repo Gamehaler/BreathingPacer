@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">BreathingPacer</string>
-    <string name="info_tekst">Informativni tekst
+    <string name="info_tekst">Informativni tekst\n
      Vivamus facilisis sagittis quam at malesuada. Pellentesque habitant morbi tristique senectus
         et netus et malesuada fames ac turpis egestas. Morbi in sapien non massa viverra efficitur
         ac sit amet velit. Phasellus pretium erat et nibh faucibus dapibus. Quisque tempus neque sit
@@ -8,7 +8,7 @@
         Curabitur molestie in nisi in fermentum. Suspendisse potenti. Donec tincidunt, sapien eget
         consequat pulvinar, sapien massa iaculis erat, sed gravida sapien massa congue quam. Proin
         nec augue id orci tincidunt mollis quis quis nisi. Donec erat ex, vulputate id consequat
-        vitae, ultricies quis arcu.
+        vitae, ultricies quis arcu.\n\n
 
         Etiam mauris turpis, viverra at mauris sit amet, posuere dapibus augue. Class aptent taciti
         sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Cras auctor
