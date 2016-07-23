@@ -1,4 +1,4 @@
-package xyz.msojat.breathingpacer.Activities;
+package xyz.msojat.breathingpacer.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
