@@ -10,11 +10,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-
-import org.joda.time.LocalTime;
 
 import java.util.concurrent.TimeUnit;
 
@@ -28,7 +25,7 @@ public class MyView extends View {
     private static float animationDurationInMillis; //millis
     private static float numberOfFrames;
 
-    // Povezivanje MyView klase sa main dretvom
+    // Povezivanje MyView klase na glavnoj dretvi (main thread)
     private final Handler uiHandler = new Handler(Looper.getMainLooper());
 
     private Paint linePaint;
@@ -41,8 +38,12 @@ public class MyView extends View {
     private float pathStepX;
     private float pathStepY;
 
-    private LocalTime prethodnoVrijeme;
-    private LocalTime trenutnoVrijeme;
+    // Nije dosta precizno (LocalTime) TODO: maknuti komentar
+    private long previousFrameTime = 0;
+    private long currentFrameTime = 0;
+    private long previousAnimationTime = 0;
+    private long currentAnimationTime = 0;
+
 
     private PointF[] frames;
     private int currentFrame;
@@ -90,6 +91,7 @@ public class MyView extends View {
      */
     public void startAnimating() {
         calculateFrames();
+        previousAnimationTime = System.currentTimeMillis();
         uiHandler.post(invalidateUI);
     }
 
@@ -135,14 +137,6 @@ public class MyView extends View {
             t += pathStepT;
         }
 
-        /*
-        for(int i = 0; i < numberOfFrames; i++){
-            frames[i] = new PointF(x, y);
-            x += pathStepX;
-            y -= pathStepY;
-        }
-        */
-
         frames[frames.length - 1] = new PointF(endPoint.x, endPoint.y);
 
         currentFrame = 0;
@@ -170,7 +164,16 @@ public class MyView extends View {
     protected void onDraw(final Canvas canvas) {
         super.onDraw(canvas);
 
-        int razlika = 1;
+        float timeDifference = 1;
+        currentFrameTime = System.currentTimeMillis();
+        currentAnimationTime = System.currentTimeMillis();
+        
+        if ((currentAnimationTime - previousAnimationTime) >= animationDurationInMillis) {
+            previousAnimationTime = System.currentTimeMillis();
+            currentFrame = 0;
+            drawDot(canvas, startPoint, dotPaint);
+            return;
+        }
 
         if (bezier != null) {
             drawBezier(canvas, bezier, linePaint);
@@ -181,33 +184,26 @@ public class MyView extends View {
             return;
         }
 
-        trenutnoVrijeme = new LocalTime();
-
-        if (prethodnoVrijeme == null) {
-            prethodnoVrijeme = new LocalTime();
+        if (previousFrameTime == 0) {
+            previousFrameTime = System.currentTimeMillis();
         }
 
-        if (!trenutnoVrijeme.equals(prethodnoVrijeme)) {
-            if ((trenutnoVrijeme.compareTo(prethodnoVrijeme)) > animationRefreshingInterval) {
-                razlika = (int) ((trenutnoVrijeme.compareTo(prethodnoVrijeme)) /
+        if (!(currentFrameTime == previousFrameTime)) {
+            if ((currentFrameTime - previousFrameTime) > animationRefreshingInterval) {
+                timeDifference = ((currentFrameTime - previousFrameTime) /
                         animationRefreshingInterval);
             }
-            prethodnoVrijeme = trenutnoVrijeme;
+            previousFrameTime = currentFrameTime;
         }
 
-        if ((currentFrame + razlika) >= frames.length) {
+        if ((currentFrame + timeDifference) >= frames.length) {
             currentFrame = 0;
         } else {
-            currentFrame = currentFrame + razlika;
+            currentFrame = (int) (currentFrame + timeDifference);
         }
 
         final PointF currentPoint = frames[currentFrame];
         drawDot(canvas, currentPoint, dotPaint);
-
-//        if (currentFrame + 1 == frames.length){
-//            currentFrame = -1;
-//        }
-//        currentFrame++;
     }
 
     private boolean hasFrameToDraw() {
@@ -226,7 +222,7 @@ public class MyView extends View {
     }
 
 
-    PointF calculateBezierPoint(float t, PointF s, PointF c1, PointF c2, PointF e) {
+    private PointF calculateBezierPoint(float t, PointF s, PointF c1, PointF c2, PointF e) {
         float u = 1f - t;
         float tt = t * t;
         float uu = u * u;
