@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:text="Pravilno disanje"
+        android:text="@string/info_activity_header_text"
         android:textSize="24sp" />
 
     <ScrollView

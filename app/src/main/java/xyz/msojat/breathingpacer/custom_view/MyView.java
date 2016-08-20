@@ -100,6 +100,10 @@ public class MyView extends View {
      */
     public void stopAnimating() {
         currentFrame = 0;
+        previousFrameTime = 0;
+        currentFrameTime = 0;
+        previousAnimationTime = 0;
+        currentAnimationTime = 0;
         invalidate();
         uiHandler.removeCallbacks(invalidateUI);
     }
@@ -167,16 +171,16 @@ public class MyView extends View {
         float timeDifference = 1;
         currentFrameTime = System.currentTimeMillis();
         currentAnimationTime = System.currentTimeMillis();
+
+        if (bezier != null) {
+            drawBezier(canvas, bezier, linePaint);
+        }
         
         if ((currentAnimationTime - previousAnimationTime) >= animationDurationInMillis) {
             previousAnimationTime = System.currentTimeMillis();
             currentFrame = 0;
             drawDot(canvas, startPoint, dotPaint);
             return;
-        }
-
-        if (bezier != null) {
-            drawBezier(canvas, bezier, linePaint);
         }
 
         if (!hasFrameToDraw()) {
