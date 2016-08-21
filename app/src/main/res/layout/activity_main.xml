@@ -33,7 +33,7 @@
             <TextView
                 android:id="@+id/tv_inhale_time"
                 style="@style/TextAppearance.AppCompat.Medium"
-                android:text="3 s"
+                android:text="3.0s"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -56,7 +56,7 @@
                 android:id="@+id/tv_exhale_time"
                 style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="wrap_content"
-                android:text="6 s"
+                android:text="6.0s"
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
@@ -86,7 +86,7 @@
             <TextView
                 android:id="@+id/tv_pause_time"
                 style="@style/TextAppearance.AppCompat.Medium"
-                android:text="0.5 s"
+                android:text="0.5s"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>

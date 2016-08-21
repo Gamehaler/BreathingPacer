@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -25,7 +26,9 @@ public class MyView extends View {
     private static float animationDurationInMillis; //millis
     private static float numberOfFrames;
 
-    // Povezivanje MyView klase na glavnoj dretvi (main thread)
+    private int width;
+
+    // Povezivanje MyView klase na glavnu dretvu (main thread)
     private final Handler uiHandler = new Handler(Looper.getMainLooper());
 
     private Paint linePaint;
@@ -35,15 +38,15 @@ public class MyView extends View {
     private PointF endPoint;
     private PointF checkPoint1;
     private PointF checkPoint2;
-    private float pathStepX;
-    private float pathStepY;
 
-    // Nije dosta precizno (LocalTime) TODO: maknuti komentar
     private long previousFrameTime = 0;
     private long currentFrameTime = 0;
     private long previousAnimationTime = 0;
     private long currentAnimationTime = 0;
 
+    private double inhaleTime = 3;
+    private double exhaleTime = 6;
+    private double pauseTime = 0.5;
 
     private PointF[] frames;
     private int currentFrame;
@@ -82,8 +85,7 @@ public class MyView extends View {
                 .getRefreshRate();
 
         animationRefreshingInterval = TimeUnit.SECONDS.toMillis(1L) / uiRefreshRate;
-        animationDurationInMillis = 10000L;
-        numberOfFrames = animationDurationInMillis / animationRefreshingInterval;
+        calculateDurationTime();
     }
 
     /**
@@ -127,19 +129,89 @@ public class MyView extends View {
         }
 
         frames = new PointF[(int) numberOfFrames + 1];
+        PointF lastFrame = new PointF(0, 0);
 
         float t = 0f;
+        int j = 0;
         float pathStepT;
-        float x = startPoint.x;
-        float y = startPoint.y;
+        float periodPercentage;
 
-        pathStepT = 100.0f / numberOfFrames;
+        periodPercentage = (float) ((inhaleTime * 1000) / animationDurationInMillis);
+        Log.d("bp", "inhalePercentage: " + periodPercentage);
+        Log.d("bp", "numberOfFrames: " + numberOfFrames);
 
-        for (int i = 0; i < numberOfFrames; i++) {
-            frames[i] = calculateBezierPoint(t / 100.0f, startPoint, checkPoint1,
+        pathStepT = 30f / (numberOfFrames * periodPercentage);
+        Log.d("bp", "pathStepT inhale: " + pathStepT);
+
+        while ((lastFrame.x < (width * 0.3)) && (j < frames.length)) {
+            frames[j] = calculateBezierPoint(t / 100.0f, startPoint, checkPoint1,
                     checkPoint2, endPoint);
             t += pathStepT;
+            lastFrame = frames[j];
+            Log.d("bp", lastFrame.toString() + " j: " + j);
+            j++;
         }
+
+//        for (j = 0; j < (numberOfFrames * periodPercentage); j++) {
+//            frames[j] = calculateBezierPoint(t / 100.0f, startPoint, checkPoint1,
+//                    checkPoint2, endPoint);
+//            t += pathStepT;
+//        }
+
+        periodPercentage = (float) ((pauseTime * 1000) / animationDurationInMillis);
+        pathStepT = 5f / (numberOfFrames * periodPercentage);
+        Log.d("bp", "pathStepT pause: " + pathStepT);
+
+        while ((lastFrame.x < (width * 0.35)) && (j < frames.length)) {
+            frames[j] = calculateBezierPoint(t / 100.0f, startPoint, checkPoint1,
+                    checkPoint2, endPoint);
+            t += pathStepT;
+            lastFrame = frames[j];
+            Log.d("bp", lastFrame.toString() + " j: " + j);
+            j++;
+        }
+//        for (j = j; j < (numberOfFrames * periodPercentage); j++) {
+//            frames[j] = calculateBezierPoint(t / 100.0f, startPoint, checkPoint1,
+//                    checkPoint2, endPoint);
+//            t += pathStepT;
+//            Log.d("bp", frames[j].toString());
+//        }
+
+        periodPercentage = (float) ((exhaleTime * 1000) / animationDurationInMillis);
+        pathStepT = 60f / (numberOfFrames * periodPercentage);
+        Log.d("bp", "pathStepT exhale: " + pathStepT);
+
+        while ((lastFrame.x < (width * 0.95)) && (j < frames.length)) {
+            frames[j] = calculateBezierPoint(t / 100.0f, startPoint, checkPoint1,
+                    checkPoint2, endPoint);
+            t += pathStepT;
+            lastFrame = frames[j];
+            Log.d("bp", lastFrame.toString() + " j: " + j);
+            j++;
+        }
+//        for (j = j; j < (numberOfFrames * periodPercentage); j++) {
+//            frames[j] = calculateBezierPoint(t / 100.0f, startPoint, checkPoint1,
+//                    checkPoint2, endPoint);
+//            t += pathStepT;
+//        }
+
+        periodPercentage = (float) ((pauseTime * 1000) / animationDurationInMillis);
+        pathStepT = 5f / (numberOfFrames * periodPercentage);
+        Log.d("bp", "pathStepT pause: " + pathStepT);
+
+        while ((lastFrame.x < width) && (j < frames.length)) {
+            frames[j] = calculateBezierPoint(t / 100.0f, startPoint, checkPoint1,
+                    checkPoint2, endPoint);
+            t += pathStepT;
+            lastFrame = frames[j];
+            Log.d("bp", lastFrame.toString() + " j: " + j);
+            j++;
+        }
+//        for (j = j; j < numberOfFrames; j++) {
+//            frames[j] = calculateBezierPoint(t / 100.0f, startPoint, checkPoint1,
+//                    checkPoint2, endPoint);
+//            t += pathStepT;
+//        }
 
         frames[frames.length - 1] = new PointF(endPoint.x, endPoint.y);
 
@@ -150,13 +222,11 @@ public class MyView extends View {
     protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
+        this.width = w;
         startPoint = new PointF(10, h - 10);
         endPoint = new PointF(w - 10, h - 10);
         checkPoint1 = new PointF((w * 0.40f) - (w / 100f * 0f), -1f * h);
         checkPoint2 = new PointF((w * 0.20f) - (w / 100f * 0f), h - 10f);
-
-        pathStepX = Math.abs(endPoint.x - startPoint.x) / numberOfFrames;
-        pathStepY = Math.abs(endPoint.y - startPoint.y) / numberOfFrames;
 
         bezier = new Path();
         bezier.moveTo(startPoint.x, startPoint.y);
@@ -167,6 +237,12 @@ public class MyView extends View {
     @Override
     protected void onDraw(final Canvas canvas) {
         super.onDraw(canvas);
+
+        //TODO: DELETE - Dots showing t
+        drawDot(canvas, calculateBezierPoint(0.30f, startPoint, checkPoint1, checkPoint2, endPoint), dotPaint);
+        drawDot(canvas, calculateBezierPoint(0.35f, startPoint, checkPoint1, checkPoint2, endPoint), dotPaint);
+        drawDot(canvas, calculateBezierPoint(0.95f, startPoint, checkPoint1, checkPoint2, endPoint), dotPaint);
+        drawDot(canvas, calculateBezierPoint(1f, startPoint, checkPoint1, checkPoint2, endPoint), dotPaint);
 
         float timeDifference = 1;
         currentFrameTime = System.currentTimeMillis();
@@ -207,6 +283,9 @@ public class MyView extends View {
         }
 
         final PointF currentPoint = frames[currentFrame];
+
+//        TODO: Delete comment
+//        Log.d("bp", currentPoint.toString() + " <-Point; Frame -> " + currentFrame + " ; Frames Lenght: " + frames.length);
         drawDot(canvas, currentPoint, dotPaint);
     }
 
@@ -242,5 +321,18 @@ public class MyView extends View {
         p.y += ttt * e.y;
 
         return p;
+    }
+
+    public void changeDurationTime(double inhaleTime, double exhaleTime, double pauseTime) {
+        this.inhaleTime = inhaleTime;
+        this.exhaleTime = exhaleTime;
+        this.pauseTime = pauseTime;
+        calculateDurationTime();
+        frames = null;
+    }
+
+    private void calculateDurationTime() {
+        animationDurationInMillis = (float) ((inhaleTime + exhaleTime + (pauseTime*2)) * 1000);
+        numberOfFrames = animationDurationInMillis / animationRefreshingInterval;
     }
 }
