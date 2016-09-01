@@ -14,20 +14,30 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean crta = false;
 
+    private MyView animacija;
     private Button pocetak;
     private Button kraj;
     private Chronometer trajanje;
+
+    @Override
+    protected void onStop() {
+        animacija.stopAnimating();
+        trajanje.stop();
+        crta = false;
+        super.onStop();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final MyView animacija = (MyView) findViewById(R.id.my_view);
+        animacija = (MyView) findViewById(R.id.my_view);
 
         pocetak = (Button) findViewById(R.id.btn_pocetak);
         kraj = (Button) findViewById(R.id.btn_kraj);
         trajanje = (Chronometer) findViewById(R.id.chronometer);
+
 
 
         pocetak.setOnClickListener(new View.OnClickListener() {
