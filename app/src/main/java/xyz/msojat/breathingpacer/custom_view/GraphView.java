@@ -18,14 +18,14 @@ import java.util.concurrent.TimeUnit;
 import xyz.msojat.breathingpacer.R;
 
 
-public class MyView extends View {
+public class GraphView extends View {
 
     private static float uiRefreshRate = 60; //FPS
     private static float animationRefreshingInterval; //millis
     private static float animationDurationInMillis; //millis
     private static float numberOfFrames;
 
-    // Povezivanje MyView klase na glavnoj dretvi (main thread)
+    // Povezivanje MyView klase na glavnu dretvu (main thread)
     private final Handler uiHandler = new Handler(Looper.getMainLooper());
 
     private Paint linePaint;
@@ -35,10 +35,7 @@ public class MyView extends View {
     private PointF endPoint;
     private PointF checkPoint1;
     private PointF checkPoint2;
-    private float pathStepX;
-    private float pathStepY;
 
-    // Nije dosta precizno (LocalTime) TODO: maknuti komentar
     private long previousFrameTime = 0;
     private long currentFrameTime = 0;
     private long previousAnimationTime = 0;
@@ -50,17 +47,17 @@ public class MyView extends View {
 
     private Path bezier;
 
-    public MyView(final Context context) {
+    public GraphView(final Context context) {
         super(context);
         init();
     }
 
-    public MyView(final Context context, final AttributeSet attrs) {
+    public GraphView(final Context context, final AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public MyView(final Context context, final AttributeSet attrs, final int defStyleAttr) {
+    public GraphView(final Context context, final AttributeSet attrs, final int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -154,9 +151,6 @@ public class MyView extends View {
         endPoint = new PointF(w - 10, h - 10);
         checkPoint1 = new PointF((w * 0.40f) - (w / 100f * 0f), -1f * h);
         checkPoint2 = new PointF((w * 0.20f) - (w / 100f * 0f), h - 10f);
-
-        pathStepX = Math.abs(endPoint.x - startPoint.x) / numberOfFrames;
-        pathStepY = Math.abs(endPoint.y - startPoint.y) / numberOfFrames;
 
         bezier = new Path();
         bezier.moveTo(startPoint.x, startPoint.y);

@@ -8,13 +8,13 @@ import android.widget.Button;
 import android.widget.Chronometer;
 
 import xyz.msojat.breathingpacer.R;
-import xyz.msojat.breathingpacer.custom_view.MyView;
+import xyz.msojat.breathingpacer.custom_view.GraphView;
 
 public class MainActivity extends AppCompatActivity {
 
     private boolean crta = false;
 
-    private MyView animacija;
+    private GraphView animacija;
     private Button pocetak;
     private Button kraj;
     private Chronometer trajanje;
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        animacija = (MyView) findViewById(R.id.my_view);
+        animacija = (GraphView) findViewById(R.id.my_view);
 
         pocetak = (Button) findViewById(R.id.btn_pocetak);
         kraj = (Button) findViewById(R.id.btn_kraj);

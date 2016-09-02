@@ -113,7 +113,7 @@
     </LinearLayout>
 
     <!-- Graf -->
-    <xyz.msojat.breathingpacer.custom_view.MyView
+    <xyz.msojat.breathingpacer.custom_view.GraphView
         android:id="@+id/my_view"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
