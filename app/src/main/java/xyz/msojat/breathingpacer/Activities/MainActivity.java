@@ -51,18 +51,20 @@ public class MainActivity extends AppCompatActivity {
                         .setPositiveButton("Prihvati", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if (!TextUtils.isEmpty(((EditText) ((Dialog)dialog).findViewById(R.id.et_time))
-                                        .getText()
-                                        .toString())) {
-                                    inhaleTime = Double.valueOf(
-                                            ((EditText) ((Dialog) dialog).findViewById(R.id.et_time))
-                                                    .getText()
-                                                    .toString());
-                                }else {
+                                EditText etDialog = ((EditText) ((Dialog) dialog).findViewById(R.id.et_time));
+                                if (!TextUtils.isEmpty(etDialog.getText().toString())) {
+                                    if ((Double.valueOf(etDialog.getText().toString())) > 0) {
+                                        inhaleTime = Double.valueOf(etDialog.getText().toString());
+                                    }
+                                } else {
                                     dialog.cancel();
                                 }
                                 animacija.changeDurationTime(inhaleTime, exhaleTime, pauseTime);
                                 tvInhaleTime.setText(String.valueOf(inhaleTime) + "s");
+
+                                animacija.stopAnimating();
+                                chronometer.stop();
+                                isDrawing = false;
                             }
                         })
                         .setNegativeButton("Odustani", new DialogInterface.OnClickListener() {
@@ -83,18 +85,20 @@ public class MainActivity extends AppCompatActivity {
                         .setPositiveButton("Prihvati", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if (!TextUtils.isEmpty(((EditText) ((Dialog) dialog).findViewById(R.id.et_time))
-                                        .getText()
-                                        .toString())) {
-                                    exhaleTime = Double.valueOf(
-                                            ((EditText) ((Dialog) dialog).findViewById(R.id.et_time))
-                                                    .getText()
-                                                    .toString());
+                                EditText etDialog = ((EditText) ((Dialog) dialog).findViewById(R.id.et_time));
+                                if (!TextUtils.isEmpty(etDialog.getText().toString())) {
+                                    if (Double.valueOf(etDialog.getText().toString()) > 0) {
+                                        exhaleTime = Double.valueOf(etDialog.getText().toString());
+                                    }
                                 } else {
                                     dialog.cancel();
                                 }
                                 animacija.changeDurationTime(inhaleTime, exhaleTime, pauseTime);
                                 tvExhaleTime.setText(String.valueOf(exhaleTime) + "s");
+
+                                animacija.stopAnimating();
+                                chronometer.stop();
+                                isDrawing = false;
                             }
                         })
                         .setNegativeButton("Odustani", new DialogInterface.OnClickListener() {
@@ -115,18 +119,20 @@ public class MainActivity extends AppCompatActivity {
                         .setPositiveButton("Prihvati", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if (!TextUtils.isEmpty(((EditText) ((Dialog) dialog).findViewById(R.id.et_time))
-                                        .getText()
-                                        .toString())) {
-                                    pauseTime = Double.valueOf(
-                                            ((EditText) ((Dialog) dialog).findViewById(R.id.et_time))
-                                                    .getText()
-                                                    .toString());
+                                EditText etDialog = ((EditText) ((Dialog) dialog).findViewById(R.id.et_time));
+                                if (!TextUtils.isEmpty(etDialog.getText().toString())) {
+                                    if (Double.valueOf(etDialog.getText().toString()) > 0) {
+                                        pauseTime = Double.valueOf(etDialog.getText().toString());
+                                    }
                                 } else {
                                     dialog.cancel();
                                 }
                                 animacija.changeDurationTime(inhaleTime, exhaleTime, pauseTime);
                                 tvPauseTime.setText(String.valueOf(pauseTime) + "s");
+
+                                animacija.stopAnimating();
+                                chronometer.stop();
+                                isDrawing = false;
                             }
                         })
                         .setNegativeButton("Odustani", new DialogInterface.OnClickListener() {

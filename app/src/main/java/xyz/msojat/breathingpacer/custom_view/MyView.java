@@ -253,9 +253,6 @@ public class MyView extends View {
         // Dohvaćanje trenutne točke iz polja.
         final PointF currentPoint = frames[currentFrame];
 
-//        TODO: Delete comment
-//        Log.d("bp", currentPoint.toString() + " <-Point; Frame -> " + currentFrame + " ; Frames Lenght: " + frames.length);
-
         // Crtanje točke.
         drawDot(canvas, currentPoint, dotPaint);
     }
