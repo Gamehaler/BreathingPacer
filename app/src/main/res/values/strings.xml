@@ -20,6 +20,7 @@
         dictum, eget fringilla diam aliquet.
     </string>
     <string name="start">Početak</string>
-    <string name="kraj">Kraj</string>
+    <string name="end">Kraj</string>
     <string name="info_activity_header_text">Relaksacijsko abdominalno disanje</string>
+    <string name="hint_et_time">Unesite vrijeme u sekundama</string>
 </resources>
