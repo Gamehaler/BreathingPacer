@@ -6,11 +6,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -26,11 +26,9 @@ public class GraphView extends View {
     private static float animationDurationInMillis; //millis
     private static float numberOfFrames;
 
-    private float xControlPoint1;
     private float xControlPoint2;
     private float xControlPoint3;
     private float xControlPoint4;
-    private float xControlPoint5;
 
     private float inhaleCoefficient = 1f;
     private float exhaleCoefficient = 1f;
@@ -62,6 +60,9 @@ public class GraphView extends View {
     private int currentFrame;
 
     private Path bezier;
+
+    private MediaPlayer mpInhale;
+    private MediaPlayer mpExhale;
 
     public GraphView(final Context context) {
         super(context);
@@ -103,6 +104,10 @@ public class GraphView extends View {
      */
     public void startAnimating() {
         calculateFrames();
+
+        mpInhale = MediaPlayer.create(this.getContext(), R.raw.sine_220hz_dry);
+        mpExhale = MediaPlayer.create(this.getContext(), R.raw.sine_150_hz);
+
         previousAnimationTime = System.currentTimeMillis();
         uiHandler.post(invalidateUI);
     }
@@ -118,6 +123,15 @@ public class GraphView extends View {
         currentAnimationTime = 0;
         invalidate();
         uiHandler.removeCallbacks(invalidateUI);
+
+        if (mpInhale != null) {
+            mpInhale.release();
+            mpInhale = null;
+        }
+        if (mpExhale != null) {
+            mpExhale.release();
+            mpExhale = null;
+        }
     }
 
     private Runnable invalidateUI = new Runnable() {
@@ -170,11 +184,9 @@ public class GraphView extends View {
         bezier.cubicTo(checkPoint1.x, checkPoint1.y, checkPoint2.x,
                 checkPoint2.y, endPoint.x, endPoint.y);
 
-        xControlPoint1 = startPoint.x;
         xControlPoint2 = w * 0.2413f;
         xControlPoint3 = w * 0.268f;
         xControlPoint4 = w * 0.8217f;
-        xControlPoint5 = endPoint.x;
     }
 
     @Override
@@ -187,7 +199,8 @@ public class GraphView extends View {
         currentAnimationTime = System.currentTimeMillis();
 
         if (frames != null) {
-            if (((currentAnimationTime - previousAnimationTime) < animationDurationInMillis) && currentFrame == frames.length-1){
+            if (((currentAnimationTime - previousAnimationTime) < animationDurationInMillis)
+                    && currentFrame == frames.length-1){
                 drawBezier(canvas, bezier, linePaint);
                 drawDot(canvas, frames[(frames.length-1)], dotPaint);
                 previousFrameTime = currentFrameTime;
@@ -195,12 +208,38 @@ public class GraphView extends View {
             }
 
             if (frames[currentFrame].x < xControlPoint2) {
+                if (mpInhale != null) {
+                    if (!mpInhale.isPlaying()) {
+                        mpInhale.start();
+                    }
+                }
                 currentCoefficient = inhaleCoefficient;
-            } else if ((frames[currentFrame].x > xControlPoint2) && (frames[currentFrame].x < xControlPoint3)) {
+            } else if ((frames[currentFrame].x >= xControlPoint2)
+                    && (frames[currentFrame].x < xControlPoint3)) {
+                if (mpInhale != null) {
+                    if (mpInhale.isPlaying()) {
+                        mpInhale.stop();
+                        mpInhale.release();
+                        mpInhale = MediaPlayer.create(this.getContext(), R.raw.sine_220hz_dry);
+                    }
+                }
                 currentCoefficient = pauseCoefficient;
-            } else if ((frames[currentFrame].x > xControlPoint3) && (frames[currentFrame].x < xControlPoint4)) {
+            } else if ((frames[currentFrame].x >= xControlPoint3)
+                    && (frames[currentFrame].x < xControlPoint4)) {
+                if (mpExhale != null) {
+                    if (!mpExhale.isPlaying()) {
+                        mpExhale.start();
+                    }
+                }
                 currentCoefficient = exhaleCoefficient;
-            } else if (frames[currentFrame].x > xControlPoint4) {
+            } else if (frames[currentFrame].x >= xControlPoint4) {
+                if (mpExhale != null) {
+                    if (mpExhale.isPlaying()) {
+                        mpExhale.stop();
+                        mpExhale.release();
+                        mpExhale = MediaPlayer.create(this.getContext(), R.raw.sine_150_hz);
+                    }
+                }
                 currentCoefficient = pauseCoefficient;
             }
         }
