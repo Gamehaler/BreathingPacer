@@ -1,23 +1,81 @@
 <resources>
     <string name="app_name">BreathingPacer</string>
-    <string name="info_tekst">Informativni tekst\n
-     Vivamus facilisis sagittis quam at malesuada. Pellentesque habitant morbi tristique senectus
-        et netus et malesuada fames ac turpis egestas. Morbi in sapien non massa viverra efficitur
-        ac sit amet velit. Phasellus pretium erat et nibh faucibus dapibus. Quisque tempus neque sit
-        amet elit suscipit suscipit. Duis tempus mattis lacus, non sagittis dolor pellentesque id.
-        Curabitur molestie in nisi in fermentum. Suspendisse potenti. Donec tincidunt, sapien eget
-        consequat pulvinar, sapien massa iaculis erat, sed gravida sapien massa congue quam. Proin
-        nec augue id orci tincidunt mollis quis quis nisi. Donec erat ex, vulputate id consequat
-        vitae, ultricies quis arcu.\n\n
+    <string name="info_tekst">
+        DISANJE\n
 
-        Etiam mauris turpis, viverra at mauris sit amet, posuere dapibus augue. Class aptent taciti
-        sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Cras auctor
-        elementum justo ac bibendum. Pellentesque bibendum interdum risus, quis maximus nulla
-        mollis nec. Suspendisse potenti. Proin fringilla varius rhoncus. Sed elementum mi ac
-        eleifend molestie. Cras vitae urna consequat, convallis lectus quis, viverra tortor.
-        Nullam suscipit est vitae nisi ultrices molestie. Sed vulputate, erat eget euismod placerat,
-        sem augue lacinia massa, in placerat metus dolor at dolor. Proin tempus magna at ligula
-        dictum, eget fringilla diam aliquet.
+        Disanje doslovno znači život. Još su drevni učitelji, mudraci, jogiji i umjetnici borilačkih
+        vještina shvatili moć i utjecaj disanja na ljudsko funkcioniranje te razvili različite
+        discipline oko njega (joga, karate, meditacija…)
+        Razumijevanje disanja znači razumijevanje ljudskog organizma i činjenice kako svaki dah
+        može koristiti razvoju i kontroli uma i tijela. Disanje tvori temelje meditacije,
+        kontemplativne misli i molitve, a mnoga znanstvena i medicinska istraživanja su dokazala kako
+        svjesno i kontrolirano disanje može biti učinkovito sredstvo u borbi protiv stresa, izgradnji
+        imuniteta i liječenju tijela na mnoge načine.\n
+
+        Ciklus disanja (udah-izdah) jedan je od najbitnijih vitalnih ritmova ili
+        ciklusa u našem tijelu. To je istovremeno i autonomni (odvija se bez naše svjesne kontrole)
+        i voljni (kontrolirani) proces koji je povezan s funkcijama našeg autonomnog živčanog
+        sustava, a posebice sa srčanim ritmom, njegovim varijabilitetom i koherencijom.\n\n
+
+        SPORO ABDOMINALNO DISANJE - SAD\n
+
+        Zbog stresa, nervoze ili tjeskobe često dišemo prebrzo, preplitko (isključivo prsima),
+        te previše udišemo, a premalo izdišemo. Takvo disanje može dovesti do vrtoglavice,
+        znojenja, lupanja srca…\n
+
+        SAD je odlična tehnika za smanjene negativnih posljedica stresa i tjeskobe.\n
+
+        Osnova ovog disanja je uspostavljanje ciklusa disanja koji je upravo suprotan
+        onome u stanjima stresa i tjeskobe – dišemo usporeno umjesto ubrzano
+        (manje od 10 ciklusa u minuti), duboko umjesto plitko (trbuhom a ne prsima),
+        te duže izdišemo nego udišemo.\n
+
+        Takvim disanjem uspostavljamo ravnotežu u radu našeg autonomnog živčanog sustava
+        (simpatikusa i parasimpatikusa), obnavljajući naš prirodni osjećaj smirenosti i dobrobiti.\n
+
+        Ovako, naravno, ne možemo stalno disati, već ovo disanje primjenjujemo kao vježbu,
+        1-3 puta dnevno u trajanju od 5-10 minuta.\n\n
+
+        SAD VJEŽBA
+
+        Trajanje: 5-10 min\n
+
+        DIŠITE POLAKO	manje od 10 ciklusa u minuti (ciljana brzina 6 c/m)\n
+        DIŠITE TRBUHOM:	izbjegavajte (pretjerano) disanje prsima\n
+        DUŽE IZDIŠITE:	3-4 sek udah, 5-6 izdah\n
+
+        Zauzmite ugodan položaj u kojem će Vam trbuh biti maksimalno slobodan
+        (ležeći, polusjedeći ili možete i stajati), položite jednu ruku na trbuh a drugu na prsa,
+        te pratite koja se ruka miče dok dišete – ako je ona na prsima, znači da dišete i dalje
+        gornjom muskulaturom. Treba se micati ona na trbuhu.\n
+
+        Kada se uvjerite da dišete trbuhom, usmjerite se na dužinu izdaha.
+        Normalno udahnite (cca 4 sek) i probajte malo produžiti izdah (cca 5sek).\n
+
+        Ukoliko osjećate napor, prekinite vježbu pa probajte ponovo kasnije.
+        Naime, cilj je upravo postići da ovakvo disanje bude praktički bez napora,
+        a naglasak je na „otpuštanju“ prilikom izdisanja – osjećaj da negativne emocije
+        i senzacije s izdahom polako izlaze iz tijela, a pozitivne ulaze.\n\n
+
+        METRONOM DISANJA\n
+
+        Da bi olakšali kontrolu trajanja udaha i izdaha, koristite naš metronom disanja:\n
+
+        -	UDAH - crvena loptica ide prema gore\n
+        -	IZDAH – crvena loptica ide prema dolje\n
+
+        Početne postavke metronoma disanja podešene su na ciljani ritam disanja
+        od 6 ciklusa u minuti:\n
+        -	3 sek UDAH\n
+        -	0,5 sek stanka\n
+        -	6 sek IZDAH\n
+        -	0,5 sek stanka\n
+
+        Ovaj je ritam disanja učinkovit za postizanje ravnoteže autonomnog živčanog sustava,
+        no za početnike može biti prespor. Osim toga, svatko od nas ima svoj „idealni ritam“,
+        te metronom disanja nudi mogućnost da sami odredite trajanje udaha i izdaha,
+        vodeći se glavnim uputama za SAD.
+
     </string>
     <string name="start">Početak</string>
     <string name="end">Kraj</string>

@@ -63,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 EditText etDialog = ((EditText) ((Dialog) dialog).findViewById(R.id.et_time));
                                 if (!TextUtils.isEmpty(etDialog.getText().toString())) {
-                                    if ((Double.valueOf(etDialog.getText().toString())) > 0) {
+                                    if (((Double.valueOf(etDialog.getText().toString())) >= 2.5) &&
+                                            ((Double.valueOf(etDialog.getText().toString())) <= 4.5)) {
                                         inhaleTime = Double.valueOf(etDialog.getText().toString());
                                     }
                                 } else {
@@ -97,7 +98,8 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 EditText etDialog = ((EditText) ((Dialog) dialog).findViewById(R.id.et_time));
                                 if (!TextUtils.isEmpty(etDialog.getText().toString())) {
-                                    if (Double.valueOf(etDialog.getText().toString()) > 0) {
+                                    if ((Double.valueOf(etDialog.getText().toString()) >= 4.5) &&
+                                            (Double.valueOf(etDialog.getText().toString()) <= 6.5)) {
                                         exhaleTime = Double.valueOf(etDialog.getText().toString());
                                     }
                                 } else {
@@ -131,7 +133,8 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 EditText etDialog = ((EditText) ((Dialog) dialog).findViewById(R.id.et_time));
                                 if (!TextUtils.isEmpty(etDialog.getText().toString())) {
-                                    if (Double.valueOf(etDialog.getText().toString()) > 0) {
+                                    if ((Double.valueOf(etDialog.getText().toString()) >= 0.3) &&
+                                            (Double.valueOf(etDialog.getText().toString()) <= 1.5)) {
                                         pauseTime = Double.valueOf(etDialog.getText().toString());
                                     }
                                 } else {
